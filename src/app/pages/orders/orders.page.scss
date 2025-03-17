@@ -70,7 +70,7 @@ ion-header {
   --padding-start: 16px;
   --padding-end: 16px;
   --padding-top: 12px;
-  --padding-bottom: 12px;
+  --padding-bottom: x;
   --background: white;
   --border-radius: 8px;
   margin-bottom: 8px;
@@ -117,18 +117,27 @@ ion-header {
 }
 
 ion-item-option {
-  --border-radius: 0;
+  margin-bottom: 8px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: x;
+  --background: white;
+
 
   &.edit-option {
     --background: var(--ion-color-primary);
+    border-radius: 8px 0 0 8px
   }
 
   &.complete-option {
+    border-radius: 0;
     --background: var(--ion-color-success);
   }
 
   &.delete-option {
     --background: var(--ion-color-danger);
+    border-radius: 0 8px 8px 0;
   }
 }
 
@@ -162,9 +171,20 @@ ion-item-option {
   }
 
   .add-button {
-    max-width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    --padding-start: 16px;
+    --padding-end: 16px;
     --border-radius: 10px;
     font-weight: 500;
+  }
+
+  .add-button ion-icon {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-top: 16px;
   }
 }
 
@@ -182,5 +202,31 @@ ion-item-option {
   p {
     color: var(--ion-color-medium);
     font-size: 16px;
+  }
+}
+
+
+.pulsing-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pulse 1.5s infinite;
+}
+
+.pulsing-arrow ion-icon {
+  font-size: 20px;
+  color: var(--ion-color-medium);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
   }
 }

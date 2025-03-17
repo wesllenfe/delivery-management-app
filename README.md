@@ -1,83 +1,61 @@
 # Delivery Management App
 
-A mobile application built with Ionic and Angular for managing delivery orders.
+Um aplicativo móvel desenvolvido com Ionic e Angular para gerenciamento de pedidos de entrega.
 
 ## Features
 
-- List, add, edit, and delete delivery orders
-- Mark orders as delivered with photo proof
-- Filter orders by status (All, Pending, Delivered)
-- View order details including delivery proof
-- Integration with ViaCEP for address lookup
-- Local storage for data persistence
+- Listar, adicionar, editar e excluir pedidos de entrega;
+- Marcar pedidos como entregues com comprovante por foto;
+- Filtrar pedidos por status (Todos, Pendentes, Entregues);
+- Filtrar pedidos através do campo de busca;
+- Visualizar detalhes do pedido, incluindo o comprovante de entrega;
+- Integração com o ViaCEP para consulta de endereços;
+- Armazenamento local para persistência de dados.
 
-## Prerequisites
+## Requisitos
 
 - Node.js (v14+)
 - npm (v6+)
 - Ionic CLI
-- Android Studio (for Android builds)
+- Android Studio (para Android builds)
 
-## Installation
+## Instalação
 
-1. Clone the repository:
+1. Clone o repositório:
 ```bash
-git clone https://github.com/yourusername/delivery-management.git
+git clone https://github.com/wesllenfe/delivery-management-app
 cd delivery-management
-Install dependencies:
-shellscript
-Copiar
+```
+
+2. Instale as dependências:
+```bash
 npm install
-Run the application in the browser:
-shellscript
-Copiar
+```
+
+3. Execute o aplicativo no navegador:
+```bash
 ionic serve
-Building for Android
-shellscript
-Copiar
-# Add Android platform
+```
+
+## Construindo para Android
+
+1. Adicione a plataforma Android:
+```bash
 ionic cap add android
+```
 
-# Build the app
+2. Construa o aplicativo:
+```bash
 ionic cap build android
+```
 
-# Open in Android Studio
+3. Abra o Android Studio:
+```bash
 ionic cap open android
-Running Tests
-shellscript
-Copiar
-# Run unit tests
+```
+
+## Executando os Testes
+1. Para executar os testes unitários:
+```bash
 ng test
-Project Structure
-src/app/models: Data models
-src/app/pages: Application pages
-src/app/components: Reusable components
-src/app/services: Services for data management and business logic
-Best Practices Implemented
-Clean Code principles
-SOLID principles
-DRY (Don't Repeat Yourself)
-Reactive programming with RxJS
-Form validation
-Error handling
-Responsive design
-Running the Application
-After creating all the files, you can run the application with:
-
-bash
-Copiar
-# Start the development server
-ionic serve
-Building for Android
-To build for Android:
-
-shellscript
-Copiar
-# Add Android platform
-ionic cap add android
-
-# Build the app
-ionic cap build android
-
-# Open in Android Studio
-ionic cap open android
+```

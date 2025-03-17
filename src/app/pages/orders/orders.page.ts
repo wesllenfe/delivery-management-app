@@ -87,7 +87,7 @@ export class OrdersPage implements OnInit {
     }
 
     const term = this.searchTerm.toLowerCase();
-    // Start with the filtered orders based on status
+
     const statusFiltered = [...this.filteredOrders];
 
     this.filteredOrders = statusFiltered.filter(order =>

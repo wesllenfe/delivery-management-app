@@ -18,9 +18,7 @@ export class AppComponent {
   }
 
   async initializeApp() {
-    // Initialize PWA elements for camera
     defineCustomElements(window);
-    // Initialize storage
     await this.storageService.init();
   }
 }
