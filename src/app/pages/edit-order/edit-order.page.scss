@@ -41,10 +41,39 @@ ion-header {
   --padding-start: 0;
   --border-color: var(--ion-color-light);
   --highlight-color: var(--ion-color-primary);
+  margin-bottom: 16px;
 
   ion-label {
     --color: var(--ion-color-medium);
+    font-size: 14px;
+    transform-origin: top left;
+    transition: transform 0.2s ease, color 0.2s ease;
+    margin-bottom: 8px;
   }
+
+  ion-input {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    font-size: 16px;
+    color: var(--ion-color-dark);
+    border-bottom: 1px solid var(--ion-color-light);
+  }
+
+  ion-input:focus-within {
+    border-bottom-color: var(--ion-color-primary);
+  }
+}
+
+.form-item ion-label[position="floating"] {
+  color: var(--ion-color-medium);
+}
+
+.form-item ion-label[position="floating"].ion-focused,
+.form-item ion-label[position="floating"].ion-floating {
+  transform: translateY(-100%) scale(0.75);
+  color: var(--ion-color-primary);
 }
 
 .error-message {
