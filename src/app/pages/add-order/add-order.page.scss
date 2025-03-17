@@ -1,0 +1,45 @@
+ion-header {
+  ion-toolbar {
+    --background: var(--ion-color-primary);
+    --color: white;
+  }
+}
+
+.form-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+
+  ion-card-header {
+    padding-bottom: 0;
+  }
+
+  ion-card-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.form-item {
+  --padding-start: 0;
+  --border-color: var(--ion-color-light);
+  --highlight-color: var(--ion-color-primary);
+
+  ion-label {
+    --color: var(--ion-color-medium);
+  }
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+  font-size: 12px;
+  margin: 4px 0 12px 0;
+  padding-left: 16px;
+}
+
+.submit-button {
+  margin-top: 24px;
+  --border-radius: 10px;
+  font-weight: 500;
+  height: 48px;
+}

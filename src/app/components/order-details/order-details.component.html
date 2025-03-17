@@ -1,0 +1,65 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center">Detalhes do Pedido</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" color="medium">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="order-header">
+    <h1>{{order.recipientName}}</h1>
+    <ion-badge [color]="order.status === 'Pendente' ? 'warning' : 'success'" class="status-badge">
+      {{order.status}}
+    </ion-badge>
+  </div>
+
+  <ion-card class="detail-card">
+    <ion-card-content>
+      <div class="detail-item">
+        <ion-icon name="barcode-outline" color="medium"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">ID do Pedido</span>
+          <span class="detail-value">{{order.id}}</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <ion-icon name="location-outline" color="medium"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">Endereço</span>
+          <span class="detail-value">{{order.address.street}}, {{order.address.number}}</span>
+          <span class="detail-value">{{order.address.neighborhood}}</span>
+          <span class="detail-value">{{order.address.city}}/{{order.address.state}}</span>
+          <span class="detail-value" *ngIf="order.address.zipCode">CEP: {{order.address.zipCode}}</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <ion-icon name="calendar-outline" color="medium"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">Data de Criação</span>
+          <span class="detail-value">{{order.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+        </div>
+      </div>
+
+      <div class="detail-item" *ngIf="order.deliveredAt">
+        <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+        <div class="detail-content">
+          <span class="detail-label">Data de Entrega</span>
+          <span class="detail-value">{{order.deliveredAt | date:'dd/MM/yyyy HH:mm'}}</span>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="order.deliveryProofImage" class="proof-image-container">
+    <h2>Comprovante de Entrega</h2>
+    <ion-card class="proof-card">
+      <img [src]="order.deliveryProofImage" alt="Comprovante de entrega" class="proof-image">
+    </ion-card>
+  </div>
+</ion-content>

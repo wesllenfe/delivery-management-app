@@ -1,0 +1,81 @@
+.order-info {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+  }
+
+  .address {
+    margin: 0;
+    font-size: 16px;
+    color: var(--ion-color-medium);
+    line-height: 1.4;
+  }
+}
+
+.instruction-text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  ion-icon {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--ion-color-dark);
+  }
+}
+
+.photo-container {
+  margin: 16px 0;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ion-color-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.empty-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+.proof-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-button {
+  margin-top: 16px;
+  --border-radius: 10px;
+  font-weight: 500;
+}
+
+.confirm-button {
+  margin-top: 12px;
+  --border-radius: 10px;
+  font-weight: 500;
+}

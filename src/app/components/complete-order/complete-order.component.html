@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center">Concluir Entrega</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" color="medium">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="order-info">
+    <h1>{{order.recipientName}}</h1>
+    <p class="address">{{order.address.street}}, {{order.address.number}}</p>
+    <p class="address">{{order.address.neighborhood}}, {{order.address.city}}/{{order.address.state}}</p>
+  </div>
+
+  <div class="instruction-text">
+    <ion-icon name="camera-outline" color="primary"></ion-icon>
+    <p>Para concluir a entrega, tire uma foto como comprovante</p>
+  </div>
+
+  <div class="photo-container">
+    <div *ngIf="!deliveryProofImage" class="empty-photo">
+      <ion-icon name="image-outline"></ion-icon>
+      <p>Nenhuma foto capturada</p>
+    </div>
+    <img *ngIf="deliveryProofImage" [src]="deliveryProofImage" alt="Comprovante de entrega" class="proof-image">
+  </div>
+
+  <ion-button expand="block" (click)="takePicture()" class="camera-button" fill="outline">
+    <ion-icon name="camera" slot="start"></ion-icon>
+    {{deliveryProofImage ? 'Tirar outra foto' : 'Tirar foto'}}
+  </ion-button>
+
+  <ion-button expand="block" [disabled]="!deliveryProofImage || isLoading" (click)="completeOrder()" class="confirm-button">
+    <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+    <span *ngIf="!isLoading">Confirmar Entrega</span>
+    <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
+  </ion-button>
+</ion-content>

@@ -1,0 +1,101 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/orders" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Adicionar Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <ion-card class="form-card">
+      <ion-card-header>
+        <ion-card-title>Informações do Pedido</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item class="form-item">
+          <ion-label position="floating">ID do Pedido</ion-label>
+          <ion-input formControlName="id" type="text"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="orderForm.get('id')?.hasError('required') && orderForm.get('id')?.touched">
+          ID do pedido é obrigatório
+        </div>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">Nome do Destinatário</ion-label>
+          <ion-input formControlName="recipientName" type="text"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="orderForm.get('recipientName')?.hasError('required') && orderForm.get('recipientName')?.touched">
+          Nome do destinatário é obrigatório
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="form-card">
+      <ion-card-header>
+        <ion-card-title>Endereço de Entrega</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item class="form-item">
+          <ion-label position="floating">CEP</ion-label>
+          <ion-input formControlName="zipCode" type="text" maxlength="8" (ionBlur)="searchCep()"></ion-input>
+          <ion-spinner name="dots" *ngIf="isLoadingAddress" slot="end"></ion-spinner>
+        </ion-item>
+
+        <div formGroupName="address">
+          <ion-item class="form-item">
+            <ion-label position="floating">Rua</ion-label>
+            <ion-input formControlName="street" type="text"></ion-input>
+            <ion-spinner name="dots" *ngIf="isLoadingAddress" slot="end"></ion-spinner>
+          </ion-item>
+          <div class="error-message" *ngIf="orderForm.get('address.street')?.hasError('required') && orderForm.get('address.street')?.touched">
+            Rua é obrigatória
+          </div>
+
+          <ion-item class="form-item">
+            <ion-label position="floating">Número</ion-label>
+            <ion-input formControlName="number" type="text"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="orderForm.get('address.number')?.hasError('required') && orderForm.get('address.number')?.touched">
+            Número é obrigatório
+          </div>
+
+          <ion-item class="form-item">
+            <ion-label position="floating">Bairro</ion-label>
+            <ion-input formControlName="neighborhood" type="text"></ion-input>
+            <ion-spinner name="dots" *ngIf="isLoadingAddress" slot="end"></ion-spinner>
+          </ion-item>
+          <div class="error-message" *ngIf="orderForm.get('address.neighborhood')?.hasError('required') && orderForm.get('address.neighborhood')?.touched">
+            Bairro é obrigatório
+          </div>
+
+          <ion-item class="form-item">
+            <ion-label position="floating">Cidade</ion-label>
+            <ion-input formControlName="city" type="text"></ion-input>
+            <ion-spinner name="dots" *ngIf="isLoadingAddress" slot="end"></ion-spinner>
+          </ion-item>
+          <div class="error-message" *ngIf="orderForm.get('address.city')?.hasError('required') && orderForm.get('address.city')?.touched">
+            Cidade é obrigatória
+          </div>
+
+          <ion-item class="form-item">
+            <ion-label position="floating">Estado</ion-label>
+            <ion-input formControlName="state" type="text"></ion-input>
+            <ion-spinner name="dots" *ngIf="isLoadingAddress" slot="end"></ion-spinner>
+          </ion-item>
+          <div class="error-message" *ngIf="orderForm.get('address.state')?.hasError('required') && orderForm.get('address.state')?.touched">
+            Estado é obrigatório
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" type="submit" [disabled]="!orderForm.valid || isSubmitting" class="submit-button">
+      <ion-spinner name="dots" *ngIf="isSubmitting"></ion-spinner>
+      <span *ngIf="!isSubmitting">Adicionar Pedido</span>
+    </ion-button>
+  </form>
+</ion-content>

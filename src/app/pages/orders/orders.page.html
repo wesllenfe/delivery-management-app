@@ -1,0 +1,119 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Pedidos de Entrega</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateToAddOrder()">
+        <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar color="light">
+    <ion-segment [(ngModel)]="selectedFilter" (ionChange)="filterOrders()" mode="ios" class="custom-segment">
+      <ion-segment-button value="all">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pending">
+        <ion-label>Pendentes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="delivered">
+        <ion-label>Entregues</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-toolbar color="light">
+    <ion-searchbar [(ngModel)]="searchTerm"
+                  (ionChange)="searchOrders()"
+                  placeholder="Buscar pedidos..."
+                  animated
+                  showCancelButton="focus"
+                  (ionClear)="clearSearch()"
+                  class="custom-searchbar">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="stats-container">
+    <ion-card class="stats-card">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="stat-item">
+                <div class="stat-value">{{totalOrders}}</div>
+                <div class="stat-label">Total</div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="stat-item">
+                <div class="stat-value">{{pendingOrders}}</div>
+                <div class="stat-label">Pendentes</div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="stat-item">
+                <div class="stat-value">{{deliveredOrders}}</div>
+                <div class="stat-label">Entregues</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-list class="orders-list" *ngIf="!isLoading">
+    <ion-item-sliding *ngFor="let order of filteredOrders">
+      <ion-item (click)="showOrderDetails(order)" class="order-item" lines="full">
+        <ion-label>
+          <div class="order-header">
+            <h2>{{order.recipientName}}</h2>
+            <ion-badge [color]="order.status === 'Pendente' ? 'warning' : 'success'" class="status-badge">
+              {{order.status}}
+            </ion-badge>
+          </div>
+          <p class="order-address">
+            <ion-icon name="location-outline" color="medium"></ion-icon>
+            {{order.address.street}}, {{order.address.number}} - {{order.address.neighborhood}}
+          </p>
+          <p class="order-city">{{order.address.city}}/{{order.address.state}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option *ngIf="order.status === 'Pendente'" color="primary" (click)="editOrder(order)" class="edit-option">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+        <ion-item-option *ngIf="order.status === 'Pendente'" color="success" (click)="completeOrder(order)" class="complete-option">
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="deleteOrder(order)" class="delete-option">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <ion-spinner name="dots"></ion-spinner>
+    <p>Carregando pedidos...</p>
+  </div>
+
+  <div class="empty-state" *ngIf="filteredOrders.length === 0 && !isLoading">
+    <ion-icon name="cube-outline" color="medium"></ion-icon>
+    <h3>Nenhum pedido encontrado</h3>
+    <p>{{searchTerm ? 'Tente uma busca diferente ou ' : ''}}adicione um novo pedido para começar</p>
+    <ion-button (click)="navigateToAddOrder()" expand="block" class="add-button">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Adicionar Pedido
+    </ion-button>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="filteredOrders.length > 0">
+    <ion-fab-button (click)="navigateToAddOrder()" color="primary" style="--width: 56px; --height: 56px;">
+      <ion-icon name="add" style="font-size: 24px;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
